@@ -1,10 +1,8 @@
-console.log("Content script loaded.");
 const regex = /lng=(.*?)&lat=(.*?)&/;
 const url = window.location.href;
 const match = regex.exec(url);
 const lng = match[1];
 const lat = match[2];
-console.log(lat + lng);
 checkIfSiteIsReady();
 
 
@@ -24,6 +22,9 @@ function checkIfSiteIsReady() {
                 const dataTestId = getDataTestId(restaraunt);
                 fetchMinimumPrice(dataTestId, 'li.vendor-tile-new-m[data-testid="' + dataTestId + '"]');
             }
+            // li.vendor-tile-new-m[data-testid="a6ut"] a div.vendor-info-row
+            // li.vendor-tile-new-m[data-testid="' + dataTestId + '"]
+            // document.querySelector('li.vendor-tile-new-m[data-testid="a6ut"] a div.vendor-info-row').innerHTML += '<p>Testi</p>';
         )
         // Add information to rest of the restaraunts
         allRestarauntLiElements.forEach(
@@ -53,7 +54,7 @@ function fetchMinimumPrice(restarauntId, boxQuerySelector) {
                 const existingParagraph = elem.querySelector('p[class="min-order-info"]');
                 if (!existingParagraph) {
                     // Add the paragraph only if it doesn't exist already
-                    elem.innerHTML += '<p class="min-order-info">Minimitilaus: ' + data['data']['minimum_order_amount'] + '€</p>';
+                    elem.querySelector(' a div.vendor-info-row').innerHTML += '<p class="min-order-info">Minimitilaus: ' + data['data']['minimum_order_amount'] + '€</p>';
                 }
             })
             
