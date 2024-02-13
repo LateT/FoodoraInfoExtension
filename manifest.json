@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "FoodoraInfoExtension",
+    "description": "Shows restaraunts minimum order amount on the main pages",
+    "version": "1.0",
+    "host_permissions": [
+      "https://www.foodora.fi/restaurants/*",
+      "https://po.fd-api.com/*"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://www.foodora.fi/restaurants/new*","https://po.fd-api.com/*"],
+        "js": ["content.js"]
+      }
+    ]
+  }
+  
