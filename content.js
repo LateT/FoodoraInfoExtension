@@ -22,9 +22,6 @@ function checkIfSiteIsReady() {
                 const dataTestId = getDataTestId(restaraunt);
                 fetchMinimumPrice(dataTestId, 'li.vendor-tile-new-m[data-testid="' + dataTestId + '"]');
             }
-            // li.vendor-tile-new-m[data-testid="a6ut"] a div.vendor-info-row
-            // li.vendor-tile-new-m[data-testid="' + dataTestId + '"]
-            // document.querySelector('li.vendor-tile-new-m[data-testid="a6ut"] a div.vendor-info-row').innerHTML += '<p>Testi</p>';
         )
         // Add information to rest of the restaraunts
         allRestarauntLiElements.forEach(
@@ -50,14 +47,13 @@ function fetchMinimumPrice(restarauntId, boxQuerySelector) {
         })
         .then(data => {
             const box = document.querySelectorAll(boxQuerySelector);
-            box.forEach( elem => {
+            box.forEach(elem => {
                 const existingParagraph = elem.querySelector('p[class="min-order-info"]');
                 if (!existingParagraph) {
                     // Add the paragraph only if it doesn't exist already
                     elem.querySelector(' a div.vendor-info-row').innerHTML += '<p class="min-order-info">Minimitilaus: ' + data['data']['minimum_order_amount'] + '€</p>';
                 }
             })
-            
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
