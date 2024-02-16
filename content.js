@@ -53,7 +53,7 @@ function fetchMinimumPrice(restarauntId, boxQuerySelector) {
     headers.append("Perseus-Client-Id",perseusHeaders.clientId);
     headers.append("Perseus-Session-Id",perseusHeaders.sessionId);
     headers.append("Dps-Session-Id", "eyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==");
-    fetch("https://po.fd-api.com/api/v5/vendors/" + restarauntId + "?include=menus,bundles,multiple_discounts,payment_types&language_id=1&opening_type=delivery&basket_currency=EUR&latitude=" + lat + "&longitude=" + lng,
+    fetch("https://po.fd-api.com/api/v5/vendors/" + restarauntId + "?language_id=1&opening_type=delivery&latitude=" + lat + "&longitude=" + lng,
     {
         // Request options
         headers: headers
