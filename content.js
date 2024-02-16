@@ -70,7 +70,7 @@ function fetchMinimumPrice(restarauntId, boxQuerySelector) {
                 const existingParagraph = elem.querySelector('p[class="min-order-info"]');
                 if (!existingParagraph) {
                     // Add the paragraph only if it doesn't exist already
-                    elem.querySelector(' a div.vendor-info-row').innerHTML += '<p class="min-order-info">Minimitilaus: ' + data['data']['minimum_order_amount'] + '€</p>';
+                    elem.querySelector(' a div.vendor-info-row').innerHTML += '<p class="min-order-info"><br>Minimitilaus: ' + data['data']['minimum_order_amount'] + '€</p>';
                 }
             })
         })
