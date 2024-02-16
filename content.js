@@ -10,7 +10,7 @@ function checkIfSiteIsReady() {
 
     if (document.querySelector('li.vendor-tile-new-l') !== null) {
         // Webpage has loaded
-
+        console.log(document.cookie);
         // Restaraunts at the top of the page with sliders sideways
         const topRestarauntLiElements = document.querySelectorAll('li.vendor-tile-new-m');
         // All restaraunts including closed but excluding the top slider panel ones.
@@ -36,9 +36,29 @@ function checkIfSiteIsReady() {
     }
 }
 
-function fetchMinimumPrice(restarauntId, boxQuerySelector) {
+function parsePerseusHeaders() {
+    const regexPerseusClientId = /dhhPerseusGuestId=(.*?);/;
+    const regexPerseusSessionId = /dhhPerseusSessionId=(.*?);/;
+    const cookies = document.cookie;
+    const perseusClientIdHeader = regexPerseusClientId.exec(cookies)[1] + ", " + regexPerseusClientId.exec(cookies)[1];
+    const perseusSessionId = regexPerseusSessionId.exec(cookies)[1] + ", " + regexPerseusSessionId.exec(cookies)[1];
+    return {
+        clientId : perseusClientIdHeader,
+        sessionId : perseusSessionId
+    }
+}
 
-    fetch("https://po.fd-api.com/api/v5/vendors/" + restarauntId + "?include=menus,bundles,multiple_discounts,payment_types&language_id=1&opening_type=delivery&basket_currency=EUR&latitude=" + lat + "&longitude=" + lng)
+function fetchMinimumPrice(restarauntId, boxQuerySelector) {
+    const headers = new Headers();
+    const perseusHeaders = parsePerseusHeaders();
+    headers.append("Perseus-Client-Id",perseusHeaders.clientId);
+    headers.append("Perseus-Session-Id",perseusHeaders.sessionId);
+    headers.append("Dps-Session-Id", "eyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==");
+    fetch("https://po.fd-api.com/api/v5/vendors/" + restarauntId + "?include=menus,bundles,multiple_discounts,payment_types&language_id=1&opening_type=delivery&basket_currency=EUR&latitude=" + lat + "&longitude=" + lng,
+    {
+        // Request options
+        headers: headers
+    })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

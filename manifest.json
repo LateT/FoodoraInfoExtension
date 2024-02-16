@@ -7,6 +7,9 @@
       "https://www.foodora.fi/restaurants/*",
       "https://po.fd-api.com/*"
     ],
+    "permissions": [
+      "cookies"
+    ],
     "content_scripts": [
       {
         "matches": ["https://www.foodora.fi/restaurants/new*","https://po.fd-api.com/*"],
