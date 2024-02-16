@@ -10,7 +10,6 @@ function checkIfSiteIsReady() {
 
     if (document.querySelector('li.vendor-tile-new-l') !== null) {
         // Webpage has loaded
-        console.log(document.cookie);
         // Restaraunts at the top of the page with sliders sideways
         const topRestarauntLiElements = document.querySelectorAll('li.vendor-tile-new-m');
         // All restaraunts including closed but excluding the top slider panel ones.
