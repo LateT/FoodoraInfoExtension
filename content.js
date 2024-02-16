@@ -1,8 +1,8 @@
-const regex = /lng=(.*?)&lat=(.*?)&/;
+const regexlng = /lng=(.*?)&/;
+const regexlat = /lat=(.*?)&/;
 const url = window.location.href;
-const match = regex.exec(url);
-const lng = match[1];
-const lat = match[2];
+const lng = regexlng.exec(url)[1];
+const lat = regexlat.exec(url)[1];
 checkIfSiteIsReady();
 
 
